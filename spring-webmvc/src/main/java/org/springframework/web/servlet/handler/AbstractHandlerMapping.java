@@ -49,7 +49,7 @@ import org.springframework.web.util.UrlPathHelper;
  * Abstract base class for {@link org.springframework.web.servlet.HandlerMapping}
  * implementations. Supports ordering, a default handler, handler interceptors,
  * including handler interceptors mapped by path patterns.
- *
+ * HandlerMapping的基类实现：支持排序，默认的handler，handler interceptors
  * <p>Note: This base class does <i>not</i> support exposure of the
  * {@link #PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE}. Support for this attribute
  * is up to concrete subclasses, typically based on request URL mappings.
@@ -339,6 +339,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 
 
 	/**
+	 * 核心方法，根据一个请求获取HandlerExecutionChain
 	 * Look up a handler for the given request, falling back to the default
 	 * handler if no specific one is found.
 	 * @param request current HTTP request
@@ -348,6 +349,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	@Override
 	@Nullable
 	public final HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+		//获取handler,这里是Object对象
 		Object handler = getHandlerInternal(request);
 		if (handler == null) {
 			handler = getDefaultHandler();
@@ -360,7 +362,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 			String handlerName = (String) handler;
 			handler = obtainApplicationContext().getBean(handlerName);
 		}
-
+		//将获取的Handler以及容器中注册的匹配当前url的拦截器进行封装
 		HandlerExecutionChain executionChain = getHandlerExecutionChain(handler, request);
 		if (CorsUtils.isCorsRequest(request)) {
 			CorsConfiguration globalConfig = this.globalCorsConfigSource.getCorsConfiguration(request);
@@ -372,6 +374,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	}
 
 	/**
+	 * 根据请求查找一个handler
 	 * Look up a handler for the given request, returning {@code null} if no
 	 * specific one is found. This method is called by {@link #getHandler};
 	 * a {@code null} return value will lead to the default handler, if one is set.

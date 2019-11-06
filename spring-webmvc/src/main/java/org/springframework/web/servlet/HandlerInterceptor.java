@@ -128,6 +128,8 @@ public interface HandlerInterceptor {
 	 * Callback after completion of request processing, that is, after rendering
 	 * the view. Will be called on any outcome of handler execution, thus allows
 	 * for proper resource cleanup.
+	 *
+	 * 请求处理完成之后，也就是渲染视图之后的一个回调
 	 * <p>Note: Will only be called if this interceptor's {@code preHandle}
 	 * method has successfully completed and returned {@code true}!
 	 * <p>As with the {@code postHandle} method, the method will be invoked on each

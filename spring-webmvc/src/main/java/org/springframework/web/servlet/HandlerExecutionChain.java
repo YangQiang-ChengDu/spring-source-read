@@ -31,7 +31,8 @@ import org.springframework.util.ObjectUtils;
 /**
  * Handler execution chain, consisting of handler object and any handler interceptors.
  * Returned by HandlerMapping's {@link HandlerMapping#getHandler} method.
- *
+ * 这个玩意主要是用来包装handler和handlerInterceptor的。
+ * 在执行的时候，可以按照链条的方式来进行执行
  * @author Juergen Hoeller
  * @since 20.06.2003
  * @see HandlerInterceptor

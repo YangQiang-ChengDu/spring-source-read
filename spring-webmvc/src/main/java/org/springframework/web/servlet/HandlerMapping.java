@@ -24,11 +24,14 @@ import org.springframework.lang.Nullable;
  * Interface to be implemented by objects that define a mapping between
  * requests and handler objects.
  *
+ * 定义了请求和handler之间的映射
+ *
  * <p>This class can be implemented by application developers, although this is not
  * necessary, as {@link org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping}
  * and {@link org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping}
  * are included in the framework. The former is the default if no
  * HandlerMapping bean is registered in the application context.
+ * 如果用户没有注册自己定义的handlerMapping，那么将采用默认的实现
  *
  * <p>HandlerMapping implementations can support mapped interceptors but do not
  * have to. A handler will always be wrapped in a {@link HandlerExecutionChain}
@@ -37,14 +40,21 @@ import org.springframework.lang.Nullable;
  * {@code preHandle} method in the given order, finally invoking the handler
  * itself if all {@code preHandle} methods have returned {@code true}.
  *
+ * handlerMapping可以支持映射拦截器。但是一般来说，handler通常是被一盒handlerExecutionChain包裹。
+ * 同时这个玩意也包裹了多个拦截器
+ *
  * <p>The ability to parameterize this mapping is a powerful and unusual
  * capability of this MVC framework. For example, it is possible to write
  * a custom mapping based on session state, cookie state or many other
  * variables. No other MVC framework seems to be equally flexible.
  *
+ * 这个玩意比较灵活的地方在于，可以根据参数来进行映射。比如基于session状态，cookie状态，或者其他变量
+ *
  * <p>Note: Implementations can implement the {@link org.springframework.core.Ordered}
  * interface to be able to specify a sorting order and thus a priority for getting
  * applied by DispatcherServlet. Non-Ordered instances get treated as lowest priority.
+ *
+ * 可以实现Order接口来处理优先级的关系
  *
  * @author Rod Johnson
  * @author Juergen Hoeller

@@ -24,6 +24,8 @@ import org.springframework.web.server.ServerWebExchange;
  * Interface to be implemented by objects that define a mapping between
  * requests and handler objects.
  *
+ * 定义映射关系：在请求和handler对象之间
+ *
  * @author Rossen Stoyanchev
  * @author Sebastien Deleuze
  * @since 5.0

@@ -31,6 +31,9 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.ReflectionUtils;
 
 /**
+ * Servlet3.0规范中支持的基于Java config 来配置ServletContext addServlet Or Filter Or Mapping
+ * 这里是使用Spring的WebApplicationInitializer来进行配置
+ *
  * Servlet 3.0 {@link ServletContainerInitializer} designed to support code-based
  * configuration of the servlet container using Spring's {@link WebApplicationInitializer}
  * SPI as opposed to (or possibly in combination with) the traditional
@@ -64,6 +67,8 @@ import org.springframework.util.ReflectionUtils;
  *   <name>spring_web</name>
  * </absolute-ordering>
  * }</pre>
+ *
+ * 使用SPI可以减少Web应用的ClassPath的Scanning
  *
  * <h2>Relationship to Spring's {@code WebApplicationInitializer}</h2>
  * Spring's {@code WebApplicationInitializer} SPI consists of just one method:

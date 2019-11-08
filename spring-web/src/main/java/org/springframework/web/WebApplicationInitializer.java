@@ -20,9 +20,21 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
 /**
+ * About ServletContext
+ * 从servlet的角度来看Web应用程序，容器的提供者负责实现ServletContext接口
+ * 用来记录事件、获取URL资源、提供全局的属性设置和获取
+ * 一个容器可以发布多个Web应用，每个应用关联一个ServletContext
+ * ContextPath：
+ * 在Web容器的中的Servlet总是和一个ServletContext关联。根据ContextPath决定访问哪个Servlet
+ *
+ * A ServletContext is rooted at a known path within a Web server.
+ * For example, a servlet context could be located at http://www.mycorp.com/catalog. All requests that begin with the /catalog request path, known as the context path,
+ * are routed to the Web application associated with the ServletContext.
+ *
  * Interface to be implemented in Servlet 3.0+ environments in order to configure the
  * {@link ServletContext} programmatically -- as opposed to (or possibly in conjunction
  * with) the traditional {@code web.xml}-based approach.
+ * SPI：Service Provider Implementations
  *
  * <p>Implementations of this SPI will be detected automatically by {@link
  * SpringServletContainerInitializer}, which itself is bootstrapped automatically

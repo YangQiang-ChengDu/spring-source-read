@@ -17,11 +17,21 @@
 package org.springframework.core.env;
 
 /**
+ * 这个接口代表了当前应用正在运行的环境。
+ * 从两个方面进行了建模应用程序的运行环境：
+ * （1）配置文件
+ * （2）属性文件
+ * 和属性相关的方法是通过父接口PropertyResolver进行发布的
+ *
+ *
  * Interface representing the environment in which the current application is running.
  * Models two key aspects of the application environment: <em>profiles</em> and
  * <em>properties</em>. Methods related to property access are exposed via the
  * {@link PropertyResolver} superinterface.
  *
+ * 配置文件是具有名字的，逻辑分组的bean 定义文件，这个玩意注册在容器内部。
+ * 一个Bean是可以分配给一个配置文件的，可以通过XML或者注解的方式来进行分配。
+ * 环境的有关配置文件相关的角色是决定哪个配置文件是激活的
  * <p>A <em>profile</em> is a named, logical group of bean definitions to be registered
  * with the container only if the given profile is <em>active</em>. Beans may be assigned
  * to a profile whether defined in XML or via annotations; see the spring-beans 3.1 schema
@@ -30,14 +40,16 @@ package org.springframework.core.env;
  * in determining which profiles (if any) are currently {@linkplain #getActiveProfiles
  * active}, and which profiles (if any) should be {@linkplain #getDefaultProfiles active
  * by default}.
- *
+ * 属性文件在应用系统中扮演了相当重要的角色。可以通过各种各样的资源文件来进行生成：例如 属性文件、JVM系统属性、
+ * 系统环境变量、JNDI、servlet 容器的参数、Map等。环境在属性文件方面扮演的角色是为用户提供一个配置属性以及解析属性
+ * 的方便机制
  * <p><em>Properties</em> play an important role in almost all applications, and may
  * originate from a variety of sources: properties files, JVM system properties, system
  * environment variables, JNDI, servlet context parameters, ad-hoc Properties objects,
  * Maps, and so on. The role of the environment object with relation to properties is to
  * provide the user with a convenient service interface for configuring property sources
  * and resolving properties from them.
- *
+ * 用户可以实现EnvironmentAware接口或者注入Environment去查询配置文件的状态或者直接解析属性文件
  * <p>Beans managed within an {@code ApplicationContext} may register to be {@link
  * org.springframework.context.EnvironmentAware EnvironmentAware} or {@code @Inject} the
  * {@code Environment} in order to query profile state or resolve properties directly.
@@ -57,7 +69,6 @@ package org.springframework.core.env;
  * of property sources prior to application context {@code refresh()}.
  *
  * @author Chris Beams
- * @since 3.1
  * @see PropertyResolver
  * @see EnvironmentCapable
  * @see ConfigurableEnvironment
@@ -67,6 +78,7 @@ package org.springframework.core.env;
  * @see org.springframework.context.ConfigurableApplicationContext#getEnvironment
  * @see org.springframework.context.ConfigurableApplicationContext#setEnvironment
  * @see org.springframework.context.support.AbstractApplicationContext#createEnvironment
+ * @since 3.1
  */
 public interface Environment extends PropertyResolver {
 
@@ -79,6 +91,7 @@ public interface Environment extends PropertyResolver {
 	 * {@link ConfigurableEnvironment#setActiveProfiles(String...)}.
 	 * <p>If no profiles have explicitly been specified as active, then any
 	 * {@linkplain #getDefaultProfiles() default profiles} will automatically be activated.
+	 *
 	 * @see #getDefaultProfiles
 	 * @see ConfigurableEnvironment#setActiveProfiles
 	 * @see AbstractEnvironment#ACTIVE_PROFILES_PROPERTY_NAME
@@ -88,6 +101,7 @@ public interface Environment extends PropertyResolver {
 	/**
 	 * Return the set of profiles to be active by default when no active profiles have
 	 * been set explicitly.
+	 *
 	 * @see #getActiveProfiles
 	 * @see ConfigurableEnvironment#setDefaultProfiles
 	 * @see AbstractEnvironment#DEFAULT_PROFILES_PROPERTY_NAME
@@ -101,8 +115,10 @@ public interface Environment extends PropertyResolver {
 	 * i.e. the method will return true if the given profile is <em>not</em> active.
 	 * For example, <pre class="code">env.acceptsProfiles("p1", "!p2")</pre> will
 	 * return {@code true} if profile 'p1' is active or 'p2' is not active.
-	 * @throws IllegalArgumentException if called with zero arguments
-	 * or if any profile is {@code null}, empty or whitespace-only
+	 *
+	 * @throws IllegalArgumentException
+	 * 		if called with zero arguments
+	 * 		or if any profile is {@code null}, empty or whitespace-only
 	 * @see #getActiveProfiles
 	 * @see #getDefaultProfiles
 	 */

@@ -26,9 +26,22 @@ import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
+ * 通过value标记的配置文件来表明一个组件是可以用来注册的。
+ * 环境中或设置当前的哪个配置文件是OK的，可以使用的
+ * value--->用在类或活着方法上，指明当前组件属于哪个配置
+ *
+ *
  * Indicates that a component is eligible for registration when one or more
  * {@linkplain #value specified profiles} are active.
+ * 下面告诉了这个属性文件的使用，结合可配置可配置的环境来设置激活的属性。
+ * 激活当前的属性配置文件的方式是通过编程的方式来进行激活
  *
+ * 下面介绍了激活配置文件的方法
+ * （1）编程
+ * （2）JVM系统属性作为环境变量、或者通过Servlet上下文中的参数来进行指定
+ * （3）通过注解来耍这个玩意
+ *
+ * 有时间还是要看看，他是如何使用这个环境变量的；从系统中获取
  * <p>A <em>profile</em> is a named logical grouping that may be activated
  * programmatically via {@link ConfigurableEnvironment#setActiveProfiles} or declaratively
  * by setting the {@link AbstractEnvironment#ACTIVE_PROFILES_PROPERTY_NAME

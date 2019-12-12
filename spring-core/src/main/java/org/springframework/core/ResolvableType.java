@@ -96,6 +96,7 @@ public class ResolvableType implements Serializable {
 
 	/**
 	 * The underlying Java type being managed.
+	 * 这个是对java反射中的type进行封装
 	 */
 	private final Type type;
 

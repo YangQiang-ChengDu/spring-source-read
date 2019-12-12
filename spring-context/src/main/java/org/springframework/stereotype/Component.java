@@ -23,10 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 标记一个类是一个组件
+ * 当使用注解进行配置或者ClassPath扫描的时候，这个注解标记的类将被作为自动装配和检索的候选者
  * Indicates that an annotated class is a "component".
  * Such classes are considered as candidates for auto-detection
  * when using annotation-based configuration and classpath scanning.
- *
+ * 其他的一些注解也被标记为作为一个主键进行使用
  * <p>Other class-level annotations may be considered as identifying
  * a component as well, typically a special kind of component:
  * e.g. the {@link Repository @Repository} annotation or AspectJ's

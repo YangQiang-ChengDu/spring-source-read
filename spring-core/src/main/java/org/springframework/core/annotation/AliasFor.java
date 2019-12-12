@@ -24,6 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 用于为注解属性声明一个别名
  * {@code @AliasFor} is an annotation that is used to declare aliases for
  * annotation attributes.
  *
